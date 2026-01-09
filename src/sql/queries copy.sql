@@ -66,18 +66,21 @@ LIMIT 5;
 SELECT species_id, COUNT(*) FROM observations
 GROUP BY species_id
 HAVING COUNT (*) < 5;
+-- Conclusion: There are 270 species having less than 5 registers
 
 -- MISSION 9
 -- Your query here;
 SELECT observer, COUNT (*) FROM observations
 GROUP BY observer
-ORDER BY observer (DESC);
+ORDER BY COUNT(*) DESC;
+-- Conclusion: The observer 'obsr453532' has done 72 observations.
 
 -- MISSION 10
 -- Your query here;
 SELECT regions.name FROM observations
 JOIN regions
 ON observations.region_id = regions.region_id; 
+ 
 
 -- MISSION 11
 -- Your query here;
@@ -87,7 +90,8 @@ ON observations.species_id = species.species_id;
 
 -- MISSION 12
 -- Your query here;
-SELECT region_id, species_id, COUNT(*) AS total_avistamientos
-FROM observations
+SELECT region_id, species_id, COUNT(*) FROM observations AS total_observations
+JOIN regions
+JOIN species
 GROUP BY region_id, species_id
-ORDER BY region_id ASC, total_avistamientos DESC;
+ORDER BY region_id ASC, total_observations DESC;

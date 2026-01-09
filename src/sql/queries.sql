@@ -22,8 +22,9 @@ SELECT * FROM observations;
 
 -- MISSION 1
 -- Your query here;
-SELECT * FROM observations
-GROUP BY species_id
-ORDER BY COUNT(*) DESC
-LIMIT 5;
+SELECT region_id, species_id, COUNT(*) FROM observations AS total_observations
+JOIN regions
+JOIN species
+GROUP BY region_id, species_id
+ORDER BY region_id ASC, total_observations DESC;
 
