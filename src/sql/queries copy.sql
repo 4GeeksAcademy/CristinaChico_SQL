@@ -77,21 +77,21 @@ ORDER BY COUNT(*) DESC;
 
 -- MISSION 10
 -- Your query here;
-SELECT regions.name FROM observations
-JOIN regions
-ON observations.region_id = regions.region_id; 
+SELECT observations.id, regions.name AS region_name, observations.observation_date
+FROM observations
+JOIN regions ON observations.region_id = regions.region_id; 
  
 
 -- MISSION 11
 -- Your query here;
-SELECT species.scientific_name FROM observations
-JOIN species
-ON observations.species_id = species.species_id;
+SELECT observations.id, species.scientific_name FROM observations
+JOIN species ON observations.species_id = species.species_id;
 
 -- MISSION 12
 -- Your query here;
-SELECT region_id, species_id, COUNT(*) FROM observations AS total_observations
-JOIN regions
-JOIN species
-GROUP BY region_id, species_id
-ORDER BY region_id ASC, total_observations DESC;
+SELECT regions.name AS region, species.scientific_name, COUNT(*) AS total
+FROM observations
+JOIN species ON observations.species_id = species.id
+JOIN regions ON observations.region_id = regions.id
+GROUP BY region, species.scientific_name
+ORDER BY region, total DESC;
